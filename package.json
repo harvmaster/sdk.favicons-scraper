@@ -13,6 +13,11 @@
     "logos",
     "images"
   ],
+  "homepage": "https://github.com/harvmaster/sdk.favicons-scraper#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harvmaster/sdk.favicons-scraper.git"
+  },
   "author": "Harvmaster <hzuccon@gmail.com>",
   "license": "ISC",
   "devDependencies": {
