@@ -27,19 +27,13 @@ const validateResponse = (response) => {
     response.forEach(validateImageInfo);
 };
 const getLogos = async (url) => {
-    try {
-        const domain = (0, extractDomain_1.extractDomain)(url);
-        const response = await fetch(`${ENDPOINT}?url=${domain}`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        validateResponse(data);
-        return data;
+    const domain = (0, extractDomain_1.extractDomain)(url);
+    const response = await fetch(`${ENDPOINT}?url=${domain}`);
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
     }
-    catch (error) {
-        console.error("Error fetching logo:", error);
-        throw new Error('Failed to fetch logo');
-    }
+    const data = await response.json();
+    validateResponse(data);
+    return data;
 };
 exports.getLogos = getLogos;
