@@ -40,18 +40,13 @@ const validateResponse = (response: LogoResponse) => {
 }
 
 export const getLogos = async (url: string): Promise<LogoResponse> => {
-  try {
-    const domain = extractDomain(url)
-    const response = await fetch(`${ENDPOINT}?url=${domain}`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    validateResponse(data);
-
-    return data;
-  } catch (error) {
-    console.error("Error fetching logo:", error);
-    throw new Error('Failed to fetch logo');
+  const domain = extractDomain(url)
+  const response = await fetch(`${ENDPOINT}?url=${domain}`);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
+  const data = await response.json();
+  validateResponse(data);
+
+  return data;
 };
