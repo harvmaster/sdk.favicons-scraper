@@ -23,7 +23,28 @@ console.log(domainLogos)
     type: 'png',
     mime: 'image/png',
     src: 'https://z-m-static.xx.fbcdn.net/rsrc.php/v3/yO/r/_GHbZfYGSj-.png'
+    device: 'desktop'
   }
+]
+*/
+```
+
+You can get the favicons from a specific device using the options.
+```ts
+const options = {
+  devices: 'mobile' // devices accepts a string containing all of the devices you want, eg: 'mobile desktop' for mobile and desktop favicons (default) 
+}
+
+const domainLogos = await getLogos('web.dev', options)
+/*
+[
+  {
+    size: { width: 180, height: 180 },
+    type: 'png',
+    mime: 'image/png',
+    src: 'https://www.gstatic.com/devrel-devsite/prod/ve5ef9ac7b497e19ece9427facc78d0c59aaab7a2bc6a0f75fdae93f4ee589f67/web/images/touchicon-180.png',
+    device: 'mobile'
+  }...
 ]
 */
 ```
