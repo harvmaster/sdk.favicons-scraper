@@ -39,7 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // Write a test for the compiled code
 var index_1 = require("../dist/index");
 var test = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var domain, logo;
+    var domain, logo, domain2, logo2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -48,6 +48,11 @@ var test = function () { return __awaiter(void 0, void 0, void 0, function () {
             case 1:
                 logo = _a.sent();
                 console.log(logo);
+                domain2 = 'web.dev';
+                return [4 /*yield*/, (0, index_1.getLogos)(domain2, { devices: 'mobile' })];
+            case 2:
+                logo2 = _a.sent();
+                console.log(logo2);
                 return [2 /*return*/];
         }
     });

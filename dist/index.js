@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getLogos = void 0;
 const extractDomain_1 = require("./extractDomain");
 const ENDPOINT = 'https://api.faviconscraper.mc.hzuccon.com/icon';
+const sourceDevices = ['desktop', 'mobile'];
 const validateImageInfo = (imageInfo) => {
     if (typeof imageInfo.size.width !== 'number') {
         throw new Error('Invalid image info, width is not a number');
@@ -26,9 +27,13 @@ const validateResponse = (response) => {
     }
     response.forEach(validateImageInfo);
 };
-const getLogos = async (url) => {
+const getLogos = async (url, options) => {
     const domain = (0, extractDomain_1.extractDomain)(url);
-    const response = await fetch(`${ENDPOINT}?url=${domain}`);
+    const requestURL = new URL(`${ENDPOINT}?url=${domain}`);
+    if (options === null || options === void 0 ? void 0 : options.devices) {
+        requestURL.searchParams.append('devices', options.devices);
+    }
+    const response = await fetch(requestURL.toString());
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
     }

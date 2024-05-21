@@ -4,6 +4,10 @@ const ENDPOINT = 'https://api.faviconscraper.mc.hzuccon.com/icon'
 
 export type LogoResponse = ImageInfo[];
 
+const sourceDevices = ['desktop', 'mobile'] as const;
+export type SourceDevice = typeof sourceDevices[number];
+export type SourceDeviceOptions = `${SourceDevice}` | `${SourceDevice} ${SourceDevice}`;
+
 export type ImageInfo = {
   size: {
       width: number;
@@ -12,7 +16,12 @@ export type ImageInfo = {
   type: string;
   mime: string;
   src: string;
+  device: SourceDevice;
 };
+
+export type Options = {
+  devices?: SourceDeviceOptions;
+}
 
 const validateImageInfo = (imageInfo: ImageInfo) => {
   if (typeof imageInfo.size.width !== 'number') {
@@ -39,9 +48,14 @@ const validateResponse = (response: LogoResponse) => {
   response.forEach(validateImageInfo);
 }
 
-export const getLogos = async (url: string): Promise<LogoResponse> => {
+export const getLogos = async (url: string, options?: Options): Promise<LogoResponse> => {
   const domain = extractDomain(url)
-  const response = await fetch(`${ENDPOINT}?url=${domain}`);
+  const requestURL = new URL(`${ENDPOINT}?url=${domain}`);
+  if (options?.devices) {
+    requestURL.searchParams.append('devices', options.devices);
+  }
+
+  const response = await fetch(requestURL.toString());
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
