@@ -2,7 +2,7 @@
 A fully-typed wrapper for the favicons scraper API<br>
 The API returns a list of the favicons from any domain you give it.
 
-# Node.js
+### Node.js
 If you want to implement a favicon scraper in your node (or bun) project, check out this scraper built in node. Its a full scraper instead of just a wrapper for an API. [Node Scraper](https://www.npmjs.com/package/favicon-scraper-node)
 
 ### Demo
