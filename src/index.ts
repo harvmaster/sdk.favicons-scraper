@@ -5,8 +5,9 @@ const ENDPOINT = 'https://api.faviconscraper.mc.hzuccon.com/icon'
 export type LogoResponse = ImageInfo[];
 
 const sourceDevices = ['desktop', 'mobile'] as const;
-export type SourceDevice = typeof sourceDevices[number];
-export type SourceDeviceOptions = `${SourceDevice}` | `${SourceDevice} ${SourceDevice}`;
+type SourceDevice = typeof sourceDevices[number];
+type SourceDeviceOptions = `${SourceDevice}` | `${SourceDevice} ${SourceDevice}`;
+
 
 export type ImageInfo = {
   size: {
@@ -20,7 +21,7 @@ export type ImageInfo = {
 };
 
 export type Options = {
-  devices?: SourceDeviceOptions;
+  devices?: SourceDeviceOptions
 }
 
 const validateImageInfo = (imageInfo: ImageInfo) => {
@@ -51,6 +52,7 @@ const validateResponse = (response: LogoResponse) => {
 export const getLogos = async (url: string, options?: Options): Promise<LogoResponse> => {
   const domain = extractDomain(url)
   const requestURL = new URL(`${ENDPOINT}?url=${domain}`);
+
   if (options?.devices) {
     requestURL.searchParams.append('devices', options.devices);
   }
